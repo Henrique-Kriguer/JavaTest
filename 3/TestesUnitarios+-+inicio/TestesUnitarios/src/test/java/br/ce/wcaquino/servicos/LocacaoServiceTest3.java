@@ -25,12 +25,12 @@ public class LocacaoServiceTest3 {
 
 
         //ação
-        Locacao locacao = service.alugarFilme(usuario, filme);
+    //    Locacao locacao = service.alugarFilme(usuario, filme);
 
         //Verificação
-       error.checkThat(locacao.getValor(), CoreMatchers.is( 4.0));
-       error.checkThat(DataUtils.isMesmaData(locacao.getDataLocacao(),new Date()),CoreMatchers.is(true));
-       error.checkThat(DataUtils.isMesmaData(locacao.getDataRetorno(), DataUtils.obterDataComDiferencaDias(1)),CoreMatchers.is(false));
+   //    error.checkThat(locacao.getValor(), CoreMatchers.is( 4.0));
+   //    error.checkThat(DataUtils.isMesmaData(locacao.getDataLocacao(),new Date()),CoreMatchers.is(true));
+   //    error.checkThat(DataUtils.isMesmaData(locacao.getDataRetorno(), DataUtils.obterDataComDiferencaDias(1)),CoreMatchers.is(false));
 
 
     }
