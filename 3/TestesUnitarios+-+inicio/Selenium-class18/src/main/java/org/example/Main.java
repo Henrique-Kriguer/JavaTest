@@ -3,6 +3,7 @@ package org.example;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,6 +21,7 @@ public class Main {
         driver.get("https://www.google.com");
         System.out.println(driver.getTitle());
         Assertions.assertEquals("Google",driver.getTitle());
+        driver.quit();
     }
   */
 /*@Test
@@ -39,6 +41,7 @@ public class Main {
    public void testeEdge(){
        System.setProperty("web-driver.msedgedriver","C:/Development/JAVA/ProgramsDownloaded/edgedriver117/msedgedriver.exe");
       WebDriver driver = new EdgeDriver();
+      driver.manage().window().fullscreen();
       driver.get("https://www.google.com");
       Assertions.assertEquals("Google",driver.getTitle());
        System.out.println(driver.getTitle());
