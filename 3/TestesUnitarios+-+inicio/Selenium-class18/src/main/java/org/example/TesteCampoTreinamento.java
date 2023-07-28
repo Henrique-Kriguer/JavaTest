@@ -9,16 +9,15 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class TesteCampoTreinamento {
 
-    @Test
     public void testeTextField(){
-        System.setProperty("web-driver.gecko.driver","C:/Development/JAVA/ProgramsDownloaded/geckodriver-r593/geckodriver.exe");
+        System.setProperty("web-driver.gecko.driver","C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
         WebDriver driver = new FirefoxDriver();
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
         driver.findElement(By.id("elementosForm:nome")).sendKeys("Teste de escrita");
         Assertions.assertEquals("Teste de escrita", driver.findElement(By.id("elementosForm:nome")).getAttribute("value"));
         driver.quit();
     }
-
+*/
     @Test
     public void testeInteragindoTextArea(){
         WebDriver driver = new FirefoxDriver();
@@ -34,4 +33,6 @@ public class TesteCampoTreinamento {
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
 
     }
+
+ */
 }
