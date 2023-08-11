@@ -77,4 +77,18 @@ public class TesteCampoTreinamento {
 
         combo.deselectAll(); // esta opção desmarcados itens marcados anteriormente.
     }
+
+    @Test
+    public void testeBtnObrigado() {
+        System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
+        WebDriver driver = new FirefoxDriver();
+        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+        WebElement botao = driver.findElement(By.id("buttonSimple"));
+        botao.click();
+        Assertions.assertEquals("Obrigado!", botao.getAttribute("value"));
+    }
+
+
+
+    
 }
