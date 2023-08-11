@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.List;
+
 public class TesteCampoTreinamento {
     @Test
     public void testeTextField() {
@@ -34,8 +36,8 @@ public class TesteCampoTreinamento {
         System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
         WebDriver driver = new FirefoxDriver();
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-        driver.findElement(By.id("elementosForm:sexo:0")).click();
-        Assertions.assertTrue(driver.findElement(By.id("elementosForm:sexo:0")).isSelected());
+        driver.findElement(By.id("elementosForm:sexo:1")).click();
+        Assertions.assertTrue(driver.findElement(By.id("elementosForm:sexo:1")).isSelected());
     }
 
     @Test
@@ -43,8 +45,8 @@ public class TesteCampoTreinamento {
         System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
         WebDriver driver = new FirefoxDriver();
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-        driver.findElement(By.id("elementosForm:comidaFavorita:2")).click();
-        Assertions.assertTrue(driver.findElement(By.id("elementosForm:comidaFavorita:2")).isSelected());
+        driver.findElement(By.id("elementosForm:comidaFavorita:0")).click();
+        Assertions.assertTrue(driver.findElement(By.id("elementosForm:comidaFavorita:0")).isSelected());
     }
 
     @Test
@@ -58,22 +60,21 @@ public class TesteCampoTreinamento {
         Assertions.assertEquals("Superior", combo.getFirstSelectedOption().getText());
 
     }
-/*
-    @Test
-    public void testeInteragindoTextArea(){
-        WebDriver driver = new FirefoxDriver();
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-        driver.findElement(By.id("elementosForm:sugestoes")).sendKeys("Teste campo textArea");
-        Assertions.assertEquals("Teste campo textArea", driver.findElement(By.id("elementosForm:sugestoes")).getAttribute("value"));
-        driver.quit();
-    }
 
     @Test
-    public void testeRadioBtn(){
+    public void testeComboBoxMultiplo() {
+        System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
         WebDriver driver = new FirefoxDriver();
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+        WebElement element = driver.findElement(By.id("elementosForm:esportes"));
+        Select combo = new Select(element);
+        combo.selectByVisibleText("Natacao");
+        combo.selectByVisibleText("Corrida");
+        combo.selectByVisibleText("Futebol");
 
+        List<WebElement> allSellectedOptions = combo.getAllSelectedOptions();
+        Assertions.assertEquals(3, allSellectedOptions.size());
+
+        combo.deselectAll(); // esta opção desmarcados itens marcados anteriormente.
     }
-*/
-
 }
