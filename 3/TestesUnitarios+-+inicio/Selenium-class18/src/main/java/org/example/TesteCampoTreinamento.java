@@ -91,14 +91,28 @@ public class TesteCampoTreinamento {
     }
 
     @Test
-    @Ignore // esta anotação não funciona, permite pular o teste em uma bateria de testes, mostrando a msg skipped
+    //@Ignore // esta anotação não funciona, permite pular o teste em uma bateria de testes, mostrando a msg skipped
     public void testeLink() {
         System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
         WebDriver driver = new FirefoxDriver();
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
         WebElement link = driver.findElement(By.linkText("Voltar"));
         link.click();
-        Assertions.fail();
+        Assertions.assertEquals("Voltou!", driver.findElement(By.id("resultado")).getText());
+
+
+    }
+    @Test
+    public void testeTextoPagina() {
+        System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
+        WebDriver driver = new FirefoxDriver();
+        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+        //Assertions.assertTrue(driver.findElement(By.tagName("body")).getText().contains("Campo de Treinamento"));
+        // Este metodo acima é ineficaz pois o java tem que varrer todo body para encontrar o elemento.
+        // Casp a tag h3 tivesse mais de uma ocorrencia, o teste daria erro pois ele vai no primeiro tag que encontrar.
+        Assertions.assertTrue(driver.findElement(By.tagName("h3")).getText().contains("Campo de Treinamento"));
+
+        Assertions.assertTrue(driver.findElement(By.className("facilAchar")).getText().contains("Cuidado onde clica, muitas armadilhas..."));
 
 
     }
