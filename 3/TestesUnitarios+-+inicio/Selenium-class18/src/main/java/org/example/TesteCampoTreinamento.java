@@ -1,6 +1,7 @@
 package org.example;
 
 import dev.failsafe.internal.util.Assert;
+import org.junit.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -19,16 +20,17 @@ public class TesteCampoTreinamento {
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
         driver.findElement(By.id("elementosForm:nome")).sendKeys("Teste de escrita");
         Assertions.assertEquals("Teste de escrita", driver.findElement(By.id("elementosForm:nome")).getAttribute("value"));
-       // driver.quit();
+        // driver.quit();
     }
-        @Test
-        public void testeTextArea(){
-            System.setProperty("web-driver.gecko.driver","C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
-            WebDriver driver = new FirefoxDriver();
-            driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-            driver.findElement(By.id("elementosForm:sugestoes")).sendKeys("Teste de escrita 2");
-            Assertions.assertEquals("Teste de escrita 2", driver.findElement(By.id("elementosForm:sugestoes")).getAttribute("value"));
-            //driver.quit();
+
+    @Test
+    public void testeTextArea() {
+        System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
+        WebDriver driver = new FirefoxDriver();
+        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+        driver.findElement(By.id("elementosForm:sugestoes")).sendKeys("Teste de escrita 2");
+        Assertions.assertEquals("Teste de escrita 2", driver.findElement(By.id("elementosForm:sugestoes")).getAttribute("value"));
+        //driver.quit();
     }
 
     @Test
@@ -88,7 +90,17 @@ public class TesteCampoTreinamento {
         Assertions.assertEquals("Obrigado!", botao.getAttribute("value"));
     }
 
+    @Test
+    @Ignore // esta anotação não funciona, permite pular o teste em uma bateria de testes, mostrando a msg skipped
+    public void testeLink() {
+        System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
+        WebDriver driver = new FirefoxDriver();
+        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+        WebElement link = driver.findElement(By.linkText("Voltar"));
+        link.click();
+        Assertions.fail();
 
 
-    
+    }
 }
+
