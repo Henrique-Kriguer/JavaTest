@@ -5,6 +5,7 @@ import org.junit.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -84,6 +85,7 @@ public class TesteCampoTreinamento {
     public void testeBtnObrigado() {
         System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
         WebDriver driver = new FirefoxDriver();
+        driver.manage().window().setSize(new Dimension(1920, 1080));
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
         WebElement botao = driver.findElement(By.id("buttonSimple"));
         botao.click();
@@ -95,6 +97,7 @@ public class TesteCampoTreinamento {
     public void testeLink() {
         System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
         WebDriver driver = new FirefoxDriver();
+        driver.manage().window().setSize(new Dimension(1920, 1080));
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
         WebElement link = driver.findElement(By.linkText("Voltar"));
         link.click();
