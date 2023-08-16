@@ -4,11 +4,9 @@ package org.example;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class TestesAlert {
 
@@ -92,5 +90,38 @@ public class TestesAlert {
         alert.accept();
         Assertions.assertEquals(":D",alert.getText());
         alert.accept();
+    }
+    @Test
+    public void testeCadastroForm() {
+        System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
+        WebDriver driver = new FirefoxDriver();
+        driver.manage().window().setSize(new Dimension(1920, 1080));
+        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+        driver.findElement(By.id("elementosForm:nome")).sendKeys("Henrique");
+        driver.findElement(By.id("elementosForm:sobrenome")).sendKeys("Kriguer");
+        driver.findElement(By.id("elementosForm:sexo:0")).click();
+        driver.findElement(By.id("elementosForm:comidaFavorita:0")).click();
+        WebElement element = driver.findElement(By.id("elementosForm:escolaridade"));
+        Select combo = new Select(element);
+        combo.selectByVisibleText("Mestrado");
+        WebElement element2 = driver.findElement(By.id("elementosForm:esportes"));
+        Select lista = new Select(element2);
+        lista.selectByVisibleText("Futebol");
+        lista.selectByVisibleText("Corrida");
+        driver.findElement(By.id("elementosForm:sugestoes")).sendKeys("Montar uma playlist");
+        driver.findElement(By.id("elementosForm:cadastrar")).click();
+        Assertions.assertTrue(driver.findElement(By.id("resultado")).getText().contains("Cadastrado!"));
+        Assertions.assertTrue(driver.findElement(By.id("resultado")).getText().contains("Nome: Henrique"));
+        Assertions.assertTrue(driver.findElement(By.id("resultado")).getText().contains("Sobrenome: Kriguer"));
+        Assertions.assertTrue(driver.findElement(By.id("resultado")).getText().contains("Sexo: Masculino"));
+        Assertions.assertTrue(driver.findElement(By.id("resultado")).getText().contains("Comida: Carne"));
+        Assertions.assertTrue(driver.findElement(By.id("resultado")).getText().contains("Escolaridade: mestrado"));
+        Assertions.assertTrue(driver.findElement(By.id("resultado")).getText().contains("Esportes: Futebol Corrida"));
+        Assertions.assertTrue(driver.findElement(By.id("resultado")).getText().contains("Sugestoes: Montar uma playlist"));
+
+
+
+
+
     }
 }
