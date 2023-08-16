@@ -76,4 +76,21 @@ public class TestesAlert {
 
     }
 
+    @Test
+    public void testeAlertPrompt() {
+        System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
+        WebDriver driver = new FirefoxDriver();
+        driver.manage().window().setSize(new Dimension(1920, 1080));
+        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+        driver.findElement(By.id("prompt")).click();
+        Alert alert = driver.switchTo().alert();
+        Assertions.assertEquals("Digite um numero",alert.getText());
+        String numero = "123";
+        alert.sendKeys(numero);
+        alert.accept();
+        Assertions.assertEquals("Era " + numero + '?',alert.getText());
+        alert.accept();
+        Assertions.assertEquals(":D",alert.getText());
+        alert.accept();
+    }
 }
