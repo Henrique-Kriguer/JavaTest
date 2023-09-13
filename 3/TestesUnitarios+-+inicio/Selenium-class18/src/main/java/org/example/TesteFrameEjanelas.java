@@ -8,10 +8,10 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class TestesFrame {
+public class TesteFrameEjanelas {
 
     @Test
-    public void testeCadastroForm() {
+    public void testeBotaoDentroFrame() {
         System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
         WebDriver driver = new FirefoxDriver();
         driver.manage().window().setSize(new Dimension(1920, 1080));
@@ -26,4 +26,17 @@ public class TestesFrame {
         driver.findElement(By.id("elementosForm:nome")).sendKeys(msg);
     }
 
+    @Test
+    public void testeScriptJanela() {
+        System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
+        WebDriver driver = new FirefoxDriver();
+        driver.manage().window().setSize(new Dimension(1920, 1080));
+        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+        driver.findElement(By.id("buttonPopUpEasy")).click();
+        driver.switchTo().window("Popup");
+        driver.findElement(By.tagName("textarea")).sendKeys("Deu certo !!");
+        driver.close();
+      
+
+    }
 }
