@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class TesteRegrasNegocio {
 
@@ -57,24 +59,46 @@ public class TesteRegrasNegocio {
         }
 
              @Test
-             public void testeCheckBox() {
-                 System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
-                 WebDriver driver = new FirefoxDriver();
-                 driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-                 driver.findElement(By.id("elementosForm:nome")).sendKeys("Henrique");
-                 driver.findElement(By.id("elementosForm:sobrenome")).sendKeys("Kriguer");
-                 driver.findElement(By.id("elementosForm:sexo:0")).click();
-                 driver.findElement(By.id("elementosForm:sexo:1")).click();
-                 driver.findElement(By.id("elementosForm:comidaFavorita:0")).click();
-                 driver.findElement(By.id("elementosForm:comidaFavorita:1")).click();
-                 driver.findElement(By.id("elementosForm:comidaFavorita:2")).click();
-                 driver.findElement(By.id("elementosForm:comidaFavorita:3")).click();
-                 driver.findElement(By.id("elementosForm:cadastrar")).click();
-                 Alert alert = driver.switchTo().alert();
-                 Assertions.assertEquals("Tem certeza que voce eh vegetariano?", alert.getText());
-                 alert.accept();
-                 driver.findElement(By.id("elementosForm:comidaFavorita:3")).click();
-                 driver.findElement(By.id("elementosForm:cadastrar")).click();
+                 public void testeCheckBox() {
+                     System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
+                     WebDriver driver = new FirefoxDriver();
+                     driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+                     driver.findElement(By.id("elementosForm:nome")).sendKeys("Henrique");
+                     driver.findElement(By.id("elementosForm:sobrenome")).sendKeys("Kriguer");
+                     driver.findElement(By.id("elementosForm:sexo:0")).click();
+                     driver.findElement(By.id("elementosForm:sexo:1")).click();
+                     driver.findElement(By.id("elementosForm:comidaFavorita:0")).click();
+                     driver.findElement(By.id("elementosForm:comidaFavorita:1")).click();
+                     driver.findElement(By.id("elementosForm:comidaFavorita:2")).click();
+                     driver.findElement(By.id("elementosForm:comidaFavorita:3")).click();
+                     driver.findElement(By.id("elementosForm:cadastrar")).click();
+                     Alert alert = driver.switchTo().alert();
+                     Assertions.assertEquals("Tem certeza que voce eh vegetariano?", alert.getText());
+                     alert.accept();
+                     driver.findElement(By.id("elementosForm:comidaFavorita:3")).click();
+                     driver.findElement(By.id("elementosForm:cadastrar")).click();
 
              }
+    @Test
+    public void testeCombo() {
+        System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
+        WebDriver driver = new FirefoxDriver();
+        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+        driver.findElement(By.id("elementosForm:nome")).sendKeys("Henrique");
+        driver.findElement(By.id("elementosForm:sobrenome")).sendKeys("Kriguer");
+        driver.findElement(By.id("elementosForm:sexo:0")).click();
+        WebElement element = driver.findElement(By.id("elementosForm:esportes"));
+        Select combo = new Select(element);
+        combo.selectByVisibleText("Natacao");
+        combo.selectByVisibleText("Futebol");
+        combo.selectByVisibleText("Corrida");
+        combo.selectByVisibleText("Karate");
+        combo.selectByVisibleText("O que eh esporte?");
+        driver.findElement(By.id("elementosForm:cadastrar")).click();
+        Alert alert = driver.switchTo().alert();
+        Assertions.assertEquals("Voce faz esporte ou nao?", alert.getText());
+        alert.accept();
+        combo.deselectByVisibleText("O que eh esporte?");
+        driver.findElement(By.id("elementosForm:cadastrar")).click();
+    }
 }
