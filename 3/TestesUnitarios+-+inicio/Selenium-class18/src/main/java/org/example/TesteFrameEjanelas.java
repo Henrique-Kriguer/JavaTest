@@ -47,11 +47,11 @@ public class TesteFrameEjanelas {
         driver.findElement(By.id("ButtonPopUpHard")).click();
         System.out.println(driver.getWindowHandle());
         System.out.println(driver.getWindowHandles());
-        driver.switchTo().window((String) driver.getWindowHandles().toArray()[1]);
+       /* driver.switchTo().window((String) driver.getWindowHandles().toArray()[1]);
         driver.findElement(By.tagName("textarea")).sendKeys("Escrevi aqui !");
         driver.switchTo().window((String) driver.getWindowHandles().toArray()[0]);
         driver.findElement(By.tagName("textarea")).sendKeys("Escrevi aqui também !");
-
+*/
 
 
     }
