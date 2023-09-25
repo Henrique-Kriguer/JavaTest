@@ -2,20 +2,29 @@ package org.example;
 
 
 //import org.junit.Assert;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
 public class TestesAlert {
 
-    @Test
-    public void testeAlertSimples() {
+    private static WebDriver driver;
+
+    @BeforeAll
+    public static void inicializa(){
         System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
-        WebDriver driver = new FirefoxDriver();
+        driver = new FirefoxDriver();
         driver.manage().window().setSize(new Dimension(1920, 1080));
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+    }
+
+    @AfterAll
+    public static void finaliza(){
+        driver.quit();
+    }
+    @Test
+    public void testeAlertSimples() {
         driver.findElement(By.id("alert")).click();
         Alert alert = driver.switchTo().alert();
         Assertions.assertEquals("Alert Simples", alert.getText());
@@ -23,22 +32,17 @@ public class TestesAlert {
         alert.accept();
         System.out.println(texto);
         driver.findElement(By.id("elementosForm:nome")).sendKeys(texto);
+        driver.quit();
+
     }
 
     @Test
     public void testeAlertConfirm() {
-        System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
-        WebDriver driver = new FirefoxDriver();
-        driver.manage().window().setSize(new Dimension(1920, 1080));
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
         driver.findElement(By.id("confirm")).click();
         Alert alert = driver.switchTo().alert();
         Assertions.assertEquals("Confirm Simples", alert.getText());
         String texto = alert.getText();
         alert.accept(); // clica no ok e surge outro alerta na tela
-
-
-
         Alert alertConfirma = driver.switchTo().alert();
         Assertions.assertEquals("Confirmado", alertConfirma.getText());
         String texto2 = alertConfirma.getText();
@@ -47,21 +51,16 @@ public class TestesAlert {
         driver.findElement(By.id("elementosForm:sobrenome")).sendKeys(texto2);
         System.out.println(texto);
         System.out.println(texto2);
-
+        driver.quit();
 
     }
     @Test
     public void testeAlertNotConfirm() {
-        System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
-        WebDriver driver = new FirefoxDriver();
-        driver.manage().window().setSize(new Dimension(1920, 1080));
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
         driver.findElement(By.id("confirm")).click();
         Alert alert = driver.switchTo().alert();
         Assertions.assertEquals("Confirm Simples", alert.getText());
         String texto3 = alert.getText();
         alert.dismiss(); // clica no cancelar e surge outro alerta na tela
-
         Alert alertCancela = driver.switchTo().alert();
         Assertions.assertEquals("Negado", alertCancela.getText());
         String texto4 = alertCancela.getText();
@@ -70,16 +69,12 @@ public class TestesAlert {
         driver.findElement(By.id("elementosForm:sobrenome")).sendKeys(texto4);
         System.out.println(texto3);
         System.out.println(texto4);
-
+        driver.quit();
 
     }
 
     @Test
     public void testeAlertPrompt() {
-        System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
-        WebDriver driver = new FirefoxDriver();
-        driver.manage().window().setSize(new Dimension(1920, 1080));
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
         driver.findElement(By.id("prompt")).click();
         Alert alert = driver.switchTo().alert();
         Assertions.assertEquals("Digite um numero",alert.getText());
@@ -90,13 +85,11 @@ public class TestesAlert {
         alert.accept();
         Assertions.assertEquals(":D",alert.getText());
         alert.accept();
+        driver.quit();
+
     }
     @Test
     public void testeCadastroForm() {
-        System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
-        WebDriver driver = new FirefoxDriver();
-        driver.manage().window().setSize(new Dimension(1920, 1080));
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
         driver.findElement(By.id("elementosForm:nome")).sendKeys("Henrique");
         driver.findElement(By.id("elementosForm:sobrenome")).sendKeys("Kriguer");
         driver.findElement(By.id("elementosForm:sexo:0")).click();
@@ -118,10 +111,6 @@ public class TestesAlert {
         Assertions.assertTrue(driver.findElement(By.id("resultado")).getText().contains("Escolaridade: mestrado"));
         Assertions.assertTrue(driver.findElement(By.id("resultado")).getText().contains("Esportes: Futebol Corrida"));
         Assertions.assertTrue(driver.findElement(By.id("resultado")).getText().contains("Sugestoes: Montar uma playlist"));
-
-
-
-
-
+        driver.quit();
     }
 }
