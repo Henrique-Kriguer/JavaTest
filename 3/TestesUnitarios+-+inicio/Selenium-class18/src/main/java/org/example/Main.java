@@ -15,10 +15,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Main {
 
-  /*  @Test
+   @Test
     public void testeFirefox() {
         System.setProperty("web-driver.gecko.driver","C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
-
         WebDriver driver = new FirefoxDriver();
         driver.get("https://www.google.com");
         System.out.println(driver.getTitle());
@@ -26,27 +25,22 @@ public class Main {
         driver.quit();
     }
 
- */
-@Test
-    public void testeChrome() {
-        System.setProperty("web-driver.chromedriver","C:/Learning/Selenium-Java/chromedriver_win32/chromedriver.exe");
 
-
-       WebDriver driver = new ChromeDriver();
+  @Test
+  public void testeChrome() {
+      System.setProperty("web-driver.chromedriver", "C:/Learning/Selenium-Java/chromedriver_win32/chromedriver.exe");
+      WebDriver driver = new ChromeDriver();
       driver.get("https://www.google.com");
-     Assertions.assertEquals("Google",driver.getTitle());
-    System.out.println(driver.getTitle());
-    driver.quit();
-
-
+      Assertions.assertEquals("Google", driver.getTitle());
+      System.out.println(driver.getTitle());
+      driver.quit();
 }
 
-/*
+
    @Test
    public void testeEdge(){
 
-       System.setProperty("web-driver.msedgedriver","C:/Learning/Selenium-Java/edgedriver_win64/msedgedriver.exe");
-
+      System.setProperty("web-driver.msedgedriver","C:/Learning/Selenium-Java/edgedriver_win64/msedgedriver.exe");
       WebDriver driver = new EdgeDriver();
       driver.manage().window().fullscreen();
       driver.get("https://www.google.com");
@@ -54,5 +48,4 @@ public class Main {
        System.out.println(driver.getTitle());
       driver.quit();
    }
-*/
 }
