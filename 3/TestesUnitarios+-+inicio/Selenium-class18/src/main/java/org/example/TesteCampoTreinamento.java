@@ -17,15 +17,17 @@ import java.util.List;
 public class TesteCampoTreinamento {
 
 private static WebDriver driver;
+private DSL dsl;
     @BeforeAll
-    public static void inicializa(){
+    public void inicializa(){
         System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
         driver = new FirefoxDriver();
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+        dsl = new DSL(driver);
     }
 
     @AfterAll
-    public static void finaliza(){
+    public void finaliza(){
         driver.quit();
     }
     @Test
