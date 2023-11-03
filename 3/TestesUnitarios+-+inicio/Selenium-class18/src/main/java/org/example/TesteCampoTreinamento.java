@@ -9,29 +9,29 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import java.sql.Driver;
 import java.util.List;
 
 public class TesteCampoTreinamento {
 
-private static WebDriver driver;
-private DSL dsl;
+    private static WebDriver driver = new EdgeDriver();
     @BeforeAll
-    public void inicializa(){
-        System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
-        driver = new FirefoxDriver();
+    public static void inicializa(){
+        System.setProperty("web-driver.msedgedriver","C:/Learning/Selenium-Java/edgedriver_win64/msedgedriver.exe");
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-        dsl = new DSL(driver);
+       // dsl = new DSL(driver);
     }
-
     @AfterAll
-    public void finaliza(){
+    public static void finaliza(){
         driver.quit();
     }
-    @Test
+      @Test
     public void testeTextField() {
+
         driver.findElement(By.id("elementosForm:nome")).sendKeys("Teste de escrita");
         Assertions.assertEquals("Teste de escrita", driver.findElement(By.id("elementosForm:nome")).getAttribute("value"));
     }
