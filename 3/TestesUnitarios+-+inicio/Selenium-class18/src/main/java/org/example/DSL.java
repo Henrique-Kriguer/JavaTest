@@ -35,7 +35,11 @@ public class DSL {
         Select combo = new Select(element);
         combo.selectByVisibleText(valor);
     }
-
+    public void deselecionaCombo(String id, String valor){
+        WebElement element = driver.findElement(By.id(id));
+        Select combo = new Select(element);
+        combo.deselectByVisibleText(valor);
+    }
     public String obterValorCombo(String id){
         WebElement element = driver.findElement(By.id(id));
         Select combo = new Select(element);
