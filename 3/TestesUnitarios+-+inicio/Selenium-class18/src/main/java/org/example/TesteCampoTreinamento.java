@@ -16,12 +16,14 @@ public class TesteCampoTreinamento {
     private static WebDriver driver = new EdgeDriver();
     private static DSL dsl;
 
+    private static CampoTreinamentoPage page;
+
     @BeforeAll
     public static void inicializa(){
         dsl = new DSL(driver);
         System.setProperty("web-driver.msedgedriver","C:/Learning/Selenium-Java/edgedriver_win64/msedgedriver.exe");
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-
+        page = new CampoTreinamentoPage(driver);
     }
     @AfterAll
     public static void finaliza(){
@@ -29,39 +31,39 @@ public class TesteCampoTreinamento {
     }
       @Test
     public void testeTextField() {
-        dsl.escreve("elementosForm:nome", "Teste de escrita");
+        page.setNome( "Teste de escrita");
         Assertions.assertEquals("Teste de escrita", dsl.obterValor("elementosForm:nome"));
     }
 
     @Test
     public void testeTextArea() {
-        dsl.escreve("elementosForm:sugestoes","Teste de escrita 2");
+       page.setsugestoes("Teste de escrita 2");
        Assertions.assertEquals("Teste de escrita 2", driver.findElement(By.id("elementosForm:sugestoes")).getAttribute("value"));
     }
 
     @Test
     public void testeRadioButtonn() {
-        dsl.clicarRadio("elementosForm:sexo:1");
-        Assertions.assertTrue(dsl.isRadioSelected("elementosForm:sexo:1"));
+        page.setSexoMasculino();
+        Assertions.assertTrue(dsl.isRadioSelected("elementosForm:sexo:0"));
     }
 
     @Test
     public void testeCheckBox() {
-        dsl.clicarRadio("elementosForm:comidaFavorita:0");
+        page.setComidaPizza();
         Assertions.assertTrue(dsl.isRadioSelected("elementosForm:comidaFavorita:0"));
     }
 
     @Test
     public void testeComboBox() {
-        dsl.selecionaCombo("elementosForm:escolaridade","Superior");
+        page.setEscolaridade("Superior");
         Assertions.assertEquals("Superior", dsl.obterValorCombo("elementosForm:escolaridade"));
     }
 
     @Test
     public void testeComboBoxMultiplo() {
-        dsl.selecionaCombo("elementosForm:esportes","Natacao");
-        dsl.selecionaCombo("elementosForm:esportes","Corrida");
-        dsl.selecionaCombo("elementosForm:esportes","Futebol");
+        page.setEsportes("Natacao");
+        page.setEsportes("Corrida");
+        page.setEsportes("Futebol");
         WebElement element = driver.findElement(By.id("elementosForm:esportes"));
         Select combo = new Select(element);
         List<WebElement> allSellectedOptions = combo.getAllSelectedOptions();
@@ -74,7 +76,7 @@ public class TesteCampoTreinamento {
 
         WebElement botao = driver.findElement(By.id("buttonSimple"));
         Assertions.assertEquals("Clique Me!",botao.getAttribute("value"));
-        dsl.clicarBtn("buttonSimple");
+        page.cadastrar();
         botao = driver.findElement(By.id("buttonSimple"));
         Assertions.assertEquals("Obrigado!",botao.getAttribute("value"));
     }

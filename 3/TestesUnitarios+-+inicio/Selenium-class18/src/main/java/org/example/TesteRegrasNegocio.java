@@ -15,12 +15,14 @@ public class TesteRegrasNegocio {
 
     private static WebDriver driver;
     private static DSL dsl;
+    private static CampoTreinamentoPage page;
     @BeforeAll
     public static void inicializa() {
         System.setProperty("web-driver.gecko.driver", "C:/Learning/Selenium-Java/geckodriver-v0.33.0-win-aarch64/geckodriver.exe");
         driver = new FirefoxDriver();
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
         dsl = new DSL(driver);
+        page = new CampoTreinamentoPage(driver);
     }
 
     @AfterAll
@@ -34,7 +36,7 @@ public class TesteRegrasNegocio {
         Alert alert = driver.switchTo().alert();
         Assertions.assertEquals("Nome eh obrigatorio", alert.getText());
         alert.accept();
-        dsl.escreve("elementosForm:nome","Henrique");
+        page.setNome("Henrique");
         dsl.clicarBtn("elementosForm:cadastrar");
         alert.accept();
     }
