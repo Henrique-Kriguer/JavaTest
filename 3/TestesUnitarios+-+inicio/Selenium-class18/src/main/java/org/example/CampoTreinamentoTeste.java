@@ -10,8 +10,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.Select;
 import java.util.List;
+import java.util.function.BooleanSupplier;
 
-public class TesteCampoTreinamento {
+public class CampoTreinamentoTeste {
 
     private static WebDriver driver = new EdgeDriver();
     private static DSL dsl;
@@ -32,38 +33,36 @@ public class TesteCampoTreinamento {
       @Test
     public void testeTextField() {
         page.setNome( "Teste de escrita");
-        Assertions.assertEquals("Teste de escrita", dsl.obterValor("elementosForm:nome"));
+        Assertions.assertEquals("Teste de escrita", page.obterValorCampoNome());
     }
 
     @Test
     public void testeTextArea() {
        page.setsugestoes("Teste de escrita 2");
-       Assertions.assertEquals("Teste de escrita 2", driver.findElement(By.id("elementosForm:sugestoes")).getAttribute("value"));
+       Assertions.assertEquals("Teste de escrita 2", page.obterValorCampoSugestoes());
     }
 
     @Test
     public void testeRadioButtonn() {
         page.setSexoMasculino();
-        Assertions.assertTrue(dsl.isRadioSelected("elementosForm:sexo:0"));
+        Assertions.assertTrue(page.RadioBtnSexoMasculinoSelecionado());
     }
 
     @Test
     public void testeCheckBox() {
         page.setComidaPizza();
-        Assertions.assertTrue(dsl.isRadioSelected("elementosForm:comidaFavorita:0"));
+        Assertions.assertEquals(true, page.RadioBtnComidaPizzaSelecionada());
     }
 
     @Test
     public void testeComboBox() {
         page.setEscolaridade("Superior");
-        Assertions.assertEquals("Superior", dsl.obterValorCombo("elementosForm:escolaridade"));
+        Assertions.assertEquals("Superior", page.ObterValorComboEscolaridade());
     }
 
     @Test
     public void testeComboBoxMultiplo() {
-        page.setEsportes("Natacao");
-        page.setEsportes("Corrida");
-        page.setEsportes("Futebol");
+        page.setEsportes("Natacao","Corrida","Futebol");
         WebElement element = driver.findElement(By.id("elementosForm:esportes"));
         Select combo = new Select(element);
         List<WebElement> allSellectedOptions = combo.getAllSelectedOptions();
